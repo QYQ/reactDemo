@@ -8,12 +8,12 @@
 
 `仅仅是UI` `虚拟DOM` `数据流`
 
-![React](img/React.png)
+![React](public/images/React.png)
 
 ## React开发环境搭建
 
 > * Nodejs、npm
-> * 
+> * 使用npm安装react、react-dom、react-tools
 
 ## 从一个小Demo说起
 
