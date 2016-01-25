@@ -6,9 +6,18 @@
 
 > github：https://github.com/facebook/react
 
-`仅仅是UI` `虚拟DOM` `数据流`
+**`仅仅是UI`** &emsp; **`虚拟DOM`** &emsp; **`数据流`**
 
 ![React](public/images/React.png)
+
+## React是什么？
+
+* 庞大项目中的传统MVC开发模式挑战
+	* 代码臃肿
+	* 紧耦合
+	* 维护成本高
+
+&emsp;&emsp;React是一个前端开发框架，使用javascript来构建页面，采用组件化的UI构建思想，通过组件复用在一定程度上降低了代码耦合程度及维护成本，并通过虚拟DOM提高了DOM渲染性能（简化DOM操作）。
 
 ## React开发环境搭建
 
@@ -17,43 +26,9 @@
 
 ## 从一个小Demo说起
 
-项目代码：//TODO
+项目代码：[https://github.com/QYQ/reactDemo](https://github.com/QYQ/reactDemo)
 
-*index.ejs:*
-
-	<!DOCTYPE html>
-	<html>
-		<head>
-		  <meta charset="utf-8" />
-		  <title>React Tutorial</title>
-		
-		</head>
-		<body>
-			<div id="content"></div>
-			<script src="javascripts/react/react.js"></script>
-			<script src="javascripts/react/build/demo.js"></script>
-		</body>
-	</html>
-
-*demo.js:*
-
-	var CommentBox = React.createClass({//创建一个React组件
-	    render : function(){
-	        return (
-	            <div>Hello,World! I am a demo
-	                <h1 value="dd">ss </h1>
-	            </div>
-	        );
-	    }
-	});
-	
-	//实例化根组件，启动框架，把标记注入到第二个参数指定的原生DOM元素中。
-	React.render(
-	    <CommentBox />,
-	    document.getElementById("content")
-	);
-
-&emsp;&emsp;React.render()和ReactDOM.render()?
+代码说明见注释
 
 ### JSX
   先看如下代码：
@@ -169,4 +144,4 @@
 
 > **虚拟DOM**
 
-> React在内存中维护了一个快速响应的DOM描述。render()返回一个DOM的描述，React能够利用内存zhong的描述来快速的计算出差异，然后更新浏览器中的DOM。
+> React在内存中维护了一个快速响应的DOM描述。render()返回一个DOM的描述，React能够利用内存zhong的描述来快速的计算出Diff，然后更新浏览器中的DOM。

@@ -1,8 +1,4 @@
-var data = [
-    {author: "Pete Hunt", text: "This is one comment"},
-    {author: "Jordan Walke", text: "This is *another* comment"}
-];
-
+//单条评论
 var Comment = React.createClass({
     render : function () {
         console.log("Comment render");
@@ -17,9 +13,10 @@ var Comment = React.createClass({
     }
 });
 
+//整个评论框
 var CommentBox = React.createClass({//创建React组件
 
-    //组件被挂载到DOM中的时候被调用，用来获取组件的初始state
+    //组件生命周期方法，组件被挂载到DOM中的时候被调用，用来获取组件的初始state
     getInitialState : function () {
         console.log("getInitialState");
         return {data:[]}
@@ -40,7 +37,7 @@ var CommentBox = React.createClass({//创建React组件
         });
     },
     handleCommentSubmit : function (newComment) {
-        //�ύ�µ����۵�����������ˢ�µ�ǰ�����б����ʾ
+        //处理评论提交操作，上传新评论到服务器，并更新显示
         console.log("ajax to commit new comment");
         $.ajax({
             url : this.props.url,
@@ -55,16 +52,17 @@ var CommentBox = React.createClass({//创建React组件
             }.bind(this)
         });
     },
-    //�˷�������һ���������һ����Ⱦ��ʱ��React�Զ����õķ�����
+    //生命周期方法，组件被挂载到了DOM中之后立即被调用
     componentDidMount : function () {
         console.log("componentDidMount");
         //setInterval(this.loadCommentsFromServer, 2000);
     },
+    //需要渲染时这行这个方法，返回一个当前组件的描述，不是真正的DOM
     render : function(){
         console.log("CommentBox render");
         return (
             <div className = "commentBox">
-                <h1>Comments</h1>
+                <h1>评论</h1>
                 <CommentList data={this.state.data} />
                 <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
             </div>
@@ -96,25 +94,25 @@ var CommentForm = React.createClass({
     },
     handleSubmit : function (e) {
         console.log("on submit click");
-        e.preventDefault();//��ֹ�����Ĭ�ϱ�����
+        e.preventDefault();//阻止浏览器默认表单提交事件处理
         var name = this.refs.name.value;
         var text = this.refs.text.value;
-        console.log(this.refs.name);
         if(!name || !text){
             return;
         }
-        //�ύ���ۣ�ˢ�������б�
+        //提交评论
         this.props.onCommentSubmit({name:name,text:text});
-        //��ձ�����state����
-        this.setState({name:"",text:""});
+        //清空输入框
+        this.refs.name.value = "";
+        this.refs.text.value = "";
     },
     render : function () {
         console.log("CommentForm render");
         return (
             <form className = "commentForm" onSubmit={this.handleSubmit}>
-                <input type = "text" placeholder = {this.state.name} ref="name"></input>
-                <input type = "text" placeholder = {this.state.text} ref="text"></input>
-                <input type = "submit" value = "Post"></input>
+                <input type = "text"  ref="name" ></input>
+                <input type = "text"  ref="text" ></input>
+                <input type = "submit" value = "评论"></input>
             </form>
         );
     }
@@ -122,7 +120,7 @@ var CommentForm = React.createClass({
 
 
 
-//��Ⱦ
+//渲染组件
 ReactDOM.render(
     <CommentBox url="/api/comments"/>,
     document.getElementById("content")

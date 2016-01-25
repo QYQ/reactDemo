@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var comments = [
-    {author: "Pete Hunt", text: "This is one comment"},
-    {author: "Jordan Walke", text: "This is *another* comment"}
+
 ];
 
 /* GET home page. */
